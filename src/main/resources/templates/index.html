@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>메인 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+<div class="container">
+    <!-- 미인증 상태 (Anonymous) -->
+    <div sec:authorize="isAnonymous()">
+        <h1>채팅 서비스</h1>
+        <p>서비스를 이용하려면 로그인 또는 회원가입을 해주세요.</p>
+        <form th:action="@{/login}" style="margin-bottom: 1rem;">
+            <button type="submit" class="btn">로그인 하기</button>
+        </form>
+        <form th:action="@{/join}">
+            <button type="submit" class="btn">회원 가입하기</button>
+        </form>
+    </div>
+
+    <!-- 인증 상태 (Authenticated) -->
+    <div sec:authorize="isAuthenticated()">
+        <p class="welcome-message">
+            환영합니다, <span sec:authentication="name">사용자</span>님!
+        </p>
+        <hr style="border: none; border-top: 1px solid #eee; margin: 2rem 0;">
+        <h3>다른 사용자와 채팅하기</h3>
+        <ul class="user-list">
+            <li th:each="account : ${accounts}" th:if="${account.username != #authentication.name}" class="user-list-item">
+                <span th:text="${account.username}">유저이름</span>
+                <form th:action="@{/chat/start/{username}(username=${account.username})}"
+                      method="post">
+                    <button type="submit" class="btn">채팅하기</button>
+                </form>
+            </li>
+        </ul>
+
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-logout">로그아웃</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

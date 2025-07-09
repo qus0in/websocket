@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>회원가입</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+<div class="container">
+    <h1>회원가입</h1>
+
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p>
+    </div>
+
+    <form th:object="${account}" th:action="@{/join}" method="post">
+        <div class="form-group">
+            <label for="username">사용자 이름</label>
+            <input type="text" th:field="*{username}" class="form-control" required autofocus
+                   minlength="4"
+                   title="사용자 이름은 4자 이상으로 입력해주세요.">
+            <span class="requirement">4자 이상</span>
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="password" th:field="*{password}" class="form-control" required
+                   minlength="8"
+                   title="비밀번호는 8자 이상으로 입력해주세요.">
+            <span class="requirement">8자 이상</span>
+        </div>
+        <button type="submit" class="btn">가입하기</button>
+    </form>
+</div>
+</body>
+</html>

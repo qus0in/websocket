@@ -1,0 +1,154 @@
+/* /src/main/resources/static/css/main.css */
+
+:root {
+    --primary-color: #075E54;
+    --secondary-color: #128C7E;
+    --danger-color: #d32f2f;
+    --light-gray-color: #f8f9fa;
+    --dark-gray-color: #343a40;
+    --text-color: #212529;
+    --border-color: #dee2e6;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+h1 {
+    color: var(--dark-gray-color);
+    margin-bottom: 2rem;
+}
+
+p {
+    margin-bottom: 1.5rem;
+    color: #6c757d;
+}
+
+/* --- Form Styles --- */
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    box-sizing: border-box; /* Important for padding and width */
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(7, 94, 84, 0.2);
+}
+
+.requirement {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* --- Button Styles --- */
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    color: white;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-decoration: none;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.btn:hover {
+    background-color: var(--primary-color);
+}
+
+.btn-logout {
+    background-color: #6c757d;
+    margin-top: 1rem;
+}
+
+.btn-logout:hover {
+    background-color: #5a6268;
+}
+
+/* --- Error Message --- */
+.error-message {
+    color: var(--danger-color);
+    background-color: rgba(211, 47, 47, 0.1);
+    border: 1px solid var(--danger-color);
+    padding: 10px;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* --- Index Page Specific --- */
+.user-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.user-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.user-list-item:last-child {
+    border-bottom: none;
+}
+
+.user-list-item .btn {
+    width: auto;
+    padding: 6px 12px;
+    font-size: 0.9em;
+}
+
+.welcome-message {
+    font-size: 1.2em;
+    font-weight: 500;
+}
+.welcome-message span {
+    color: var(--primary-color);
+    font-weight: bold;
+}

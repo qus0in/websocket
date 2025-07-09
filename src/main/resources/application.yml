@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: websocket
+  # --- 데이터베이스 설정 추가 ---
+  datasource:
+    # MySQL 서버의 JDBC URL
+    url: ${DB_URL}
+    # MySQL 접속용 사용자 이름
+    username: ${DB_USERNAME}
+    # MySQL 접속용 비밀번호
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # --- JPA 및 Hibernate 설정 추가 ---
+  jpa:
+    hibernate:
+      # ddl-auto: 애플리케이션 실행 시 스키마(테이블) 처리 방식
+      # - update: 변경된 부분만 반영 (개발 시 유용)
+      # - create: 매번 새로 생성
+      # - validate: 기존 스키마와 일치하는지 검증
+      # - none: 아무것도 하지 않음 (운영 환경 권장)
+      ddl-auto: update
+    # 실행되는 SQL 쿼리를 콘솔에 표시할지 여부
+    show-sql: true
+    properties:
+      hibernate:
+        # SQL 쿼리를 보기 좋게 포맷팅
+        format_sql: true
+        # 사용할 데이터베이스 방언(Dialect) 설정
+        dialect: org.hibernate.dialect.MySQLDialect
+
+logging:
+  level:
+    dev.qus0in.websocket: debug
+    org.hibernate.SQL: debug
+    org.hibernate.orm.jdbc.bind: trace
