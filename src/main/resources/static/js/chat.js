@@ -51,20 +51,19 @@ document.addEventListener('DOMContentLoaded', () => {
         messageElement.appendChild(contentElement);
 
         // 타임스탬프 (JavaScript에서 포맷팅)
-        const timestampElement = document.createElement('span');
-        timestampElement.classList.add('timestamp');
-        const sentDate = new Date(msg.sentAt); // ISO 8601 형식의 날짜 문자열을 Date 객체로 변환
-        timestampElement.textContent = sentDate.toLocaleTimeString('ko-KR', {
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true
-        });
+//        const timestampElement = document.createElement('span');
+//        timestampElement.classList.add('timestamp');
+//        const sentDate = new Date(msg.sentAt); // ISO 8601 형식의 날짜 문자열을 Date 객체로 변환
+//        timestampElement.textContent = sentDate.toLocaleTimeString('ko-KR', {
+//            hour: '2-digit',
+//            minute: '2-digit',
+//            hour12: true
+//        });
         // 타임스탬프
         const timestampElement = document.createElement('span');
         timestampElement.classList.add('timestamp');
         // 포맷팅 함수 사용
         timestampElement.textContent = formatToLocalTime(msg.sentAt);
-
         messageElement.appendChild(timestampElement);
 
         messagesContainer.appendChild(messageElement);
