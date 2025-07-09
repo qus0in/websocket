@@ -13,6 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     };
 
+     /**
+     * ISO 형식의 시간 문자열을 받아서 브라우저 시간대에 맞는 '오전/오후 hh:mm' 형식으로 변환합니다.
+     * @param {string} isoString - 서버에서 받은 ZonedDateTime 문자열
+     * @returns {string} - 포맷팅된 시간 문자열
+     */
+    const formatToLocalTime = (isoString) => {
+        if (!isoString) return '';
+        const date = new Date(isoString);
+        return date.toLocaleTimeString('ko-KR', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+        });
+    };
+
     // 메시지를 화면에 동적으로 추가하는 함수
     const displayMessage = (msg) => {
         const messageElement = document.createElement('div');
@@ -44,11 +59,30 @@ document.addEventListener('DOMContentLoaded', () => {
             minute: '2-digit',
             hour12: true
         });
+        // 타임스탬프
+        const timestampElement = document.createElement('span');
+        timestampElement.classList.add('timestamp');
+        // 포맷팅 함수 사용
+        timestampElement.textContent = formatToLocalTime(msg.sentAt);
+
         messageElement.appendChild(timestampElement);
 
         messagesContainer.appendChild(messageElement);
         scrollToBottom();
     };
+
+    /**
+     * 페이지에 이미 렌더링된 모든 타임스탬프를 브라우저 시간대에 맞게 변환합니다.
+     */
+    const initializeTimestamps = () => {
+        const timestampElements = document.querySelectorAll('.timestamp[data-timestamp]');
+        timestampElements.forEach(el => {
+            const utcTimestamp = el.getAttribute('data-timestamp');
+            // 포맷팅 함수를 사용해 화면에 시간 표시
+            el.textContent = formatToLocalTime(utcTimestamp);
+        });
+    };
+
 
     // WebSocket 연결 성공 시 콜백
     const onConnected = () => {
@@ -96,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 스크립트 실행 시작 ---
+    initializeTimestamps(); // 페이지 로드 시 기존 메시지들의 시간 포맷팅
     scrollToBottom(); // 초기 메시지 로드 후 스크롤을 아래로
     connect(); // WebSocket 연결 시작
 });

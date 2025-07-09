@@ -27,13 +27,16 @@
 
     <div id="messages-container">
         <!-- 서버에서 전달된 기존 메시지 표시 -->
-        <div th:each="msg : ${messages}"
+        <span th:each="msg : ${messages}"
              th:classappend="${msg.sender == currentUser} ? 'my-message' : 'other-message'"
              class="message">
-            <div th:if="${msg.sender != currentUser}" class="sender" th:text="${msg.sender}"></div>
-            <div class="message-content" th:text="${msg.message}"></div>
-            <span class="timestamp" th:text="${#temporals.format(msg.sentAt, 'a hh:mm')}"></span>
-        </div>
+            <span class="sender"
+                  th:if="${msg.sender != currentUser}"
+                  th:text="${msg.sender}"></span>
+            <span class="message-content" th:text="${msg.message}"></span>
+<!--            <span class="timestamp" th:text="${#temporals.format(msg.sentAt, 'a hh:mm')}"></span>-->
+             <span class="timestamp" th:data-timestamp="${msg.sentAt}"></span>-->
+        </span>
     </div>
 
     <form id="message-form">

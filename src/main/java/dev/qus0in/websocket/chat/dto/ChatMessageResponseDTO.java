@@ -12,5 +12,6 @@ import java.time.ZonedDateTime;
 public record ChatMessageResponseDTO(
         String sender,
         String message,
-        LocalDateTime sentAt
+//        LocalDateTime sentAt
+        ZonedDateTime sentAt
 ) {}

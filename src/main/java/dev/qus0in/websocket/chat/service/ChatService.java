@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZoneId;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -68,7 +69,8 @@ public class ChatService {
                 .map(message -> new ChatMessageResponseDTO(
                         message.getSender().getUsername(),
                         message.getMessage(),
-                        message.getCreatedAt()
+//                        message.getCreatedAt()
+                        message.getCreatedAt().atZone(ZoneId.of("UTC"))
                 ))
                 .collect(Collectors.toList());
     }
@@ -101,7 +103,8 @@ public class ChatService {
         return new ChatMessageResponseDTO(
                 chatMessage.getSender().getUsername(),
                 chatMessage.getMessage(),
-                chatMessage.getCreatedAt()
+//                chatMessage.getCreatedAt()
+                chatMessage.getCreatedAt().atZone(ZoneId.of("UTC"))
         );
     }
 
