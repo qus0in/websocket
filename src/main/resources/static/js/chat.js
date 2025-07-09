@@ -19,8 +19,20 @@ document.addEventListener('DOMContentLoaded', () => {
      * @returns {string} - 포맷팅된 시간 문자열
      */
     const formatToLocalTime = (isoString) => {
+//        console.log(isoString);
         if (!isoString) return '';
-        const date = new Date(isoString);
+
+        // 1. 서버에서 오는 '...Z[UTC]' 형식에서 JavaScript가 인식하지 못하는 '[...]' 부분을 제거합니다.
+        const parsableDateString = isoString.replace(/\[.*?\]$/, '');
+        const date = new Date(parsableDateString);
+
+        // 2. 날짜 변환에 실패한 경우, UI에 "Invalid Date"가 표시되지 않도록 안전장치를 추가합니다.
+        if (isNaN(date)) {
+            console.error('Invalid date format received:', isoString);
+            return '';
+        }
+
+//        const date = new Date(isoString);
         return date.toLocaleTimeString('ko-KR', {
             hour: '2-digit',
             minute: '2-digit',
